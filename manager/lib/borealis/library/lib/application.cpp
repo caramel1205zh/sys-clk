@@ -244,6 +244,33 @@ bool Application::init(std::string title, Style style, Theme theme)
             nvgAddFallbackFontId(Application::vg, Application::fontStash.regular, Application::fontStash.korean);
         }
 
+        // Chinese Simplified font
+        rc = plGetSharedFontByType(&font, PlSharedFontType_ChineseSimplified);
+        if (R_SUCCEEDED(rc))
+        {
+            Logger::info("Adding Switch shared Chinese Simplified font");
+            Application::fontStash.schinese = Application::loadFontFromMemory("schinese", font.address, font.size, false);
+            nvgAddFallbackFontId(Application::vg, Application::fontStash.regular, Application::fontStash.schinese);
+        }
+
+        // Chinese Simplified Extended font
+        rc = plGetSharedFontByType(&font, PlSharedFontType_ExtChineseSimplified);
+        if (R_SUCCEEDED(rc))
+        {
+            Logger::info("Adding Switch shared Chinese Simplified extended font");
+            Application::fontStash.extSchinese = Application::loadFontFromMemory("extSchinese", font.address, font.size, false);
+            nvgAddFallbackFontId(Application::vg, Application::fontStash.regular, Application::fontStash.extSchinese);
+        }
+
+        // Chinese Traditional font
+        rc = plGetSharedFontByType(&font, PlSharedFontType_ChineseTraditional);
+        if (R_SUCCEEDED(rc))
+        {
+            Logger::info("Adding Switch shared Chinese Traditional font");
+            Application::fontStash.tchinese = Application::loadFontFromMemory("tchinese", font.address, font.size, false);
+            nvgAddFallbackFontId(Application::vg, Application::fontStash.regular, Application::fontStash.tchinese);
+        }
+
         // Extented font
         rc = plGetSharedFontByType(&font, PlSharedFontType_NintendoExt);
         if (R_SUCCEEDED(rc))
